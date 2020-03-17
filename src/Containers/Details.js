@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const details = (item) => {
-    console.log(item.kolicina, item.cijena);
-    const kolicina = 1;
+const Details = (props) => {
+    const item = {...props.item}
+    const [kolicina, updKolicina] = useState(1);
+
     return (
         <div>
             <div>
@@ -15,16 +16,16 @@ const details = (item) => {
             <div>
                 <p>{item.opisi}</p>
             </div>
+            <form>
+                <label htmlFor='kolicina'>Kolicina: </label>
+                <input id='kolicina' type='number' value={kolicina} onChange={(e)=> {e.target.value >= 1 && updKolicina(e.target.value)}}></input> {/*min attr nije dovoljan*/}
+                <button onClick={()=>props.onAddItem(item.id, kolicina)}>Dodaj i završi</button>
+            </form>
             <div>
-                <p>Kolicina:</p>
-                <input type={'number'} defaultValue={1}></input>
-                <button onClick={()=>console.log('dodajem u korpu')}>Dodaj u korpu</button>
-            </div>
-            <div>
-                <h1>{`Ukupno za ${item.naziv}: ${kolicina*item.cijena}`}</h1>
+                <h1>{`Ukupno za ${item.naziv}: ${kolicina*item.cijena} KM`}</h1>
             </div>
         </div>
     )
 };
 
-export default details;
+export default Details;

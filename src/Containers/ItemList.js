@@ -8,6 +8,7 @@ const ItemList = () => {
 
     const [clickedItems, updClickedItem] = useState([]);
     const [view, changeView] = useState(1);
+    const [korpa, updKorpa] = useState([])
     //1-ItemList, 2-Details, 3-Korpa, 4-Kasa
 
     const items = [
@@ -25,7 +26,17 @@ const ItemList = () => {
         updClickedItem([...clickedItems]);
         changeView(2)
     };
-    console.log(items[clickedItems])
+
+    const onAddItem = (id, kolicina) => {
+        updKorpa(oldVal => {
+            oldVal.unshift({id:id, kolicina: kolicina});
+            localStorage.setItem('korpa:', JSON.stringify(oldVal));
+            changeView(1);
+            return [...oldVal];
+        })
+    };
+
+    console.log('clickedItems', clickedItems, 'view', view, 'korpa', korpa)
     return (
         <>
         {
@@ -38,10 +49,8 @@ const ItemList = () => {
         : null
         }
         {
-            view === 2 ? <Details {...{...items[clickedItems[0]], id:clickedItems[0]}}/>: null
-        }
-        
-    
+            view === 2 ? <Details item={{...items[clickedItems[0]], id:clickedItems[0]}} onAddItem={onAddItem}/>: null
+        }    
     </>
     )
 
