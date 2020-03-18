@@ -8,7 +8,7 @@ const Details = (props) => {
         <div>
             <div>
                 <h1>{item.naziv}</h1>
-                <h1>{`Cijena: ${item.cijena}`}</h1>
+                <h1>{`Cijena: ${item.cijena} KM`}</h1>
             </div>
             <div>
                 <img src={item.src} alt={item.naziv} className="ItemView"></img>
@@ -16,10 +16,11 @@ const Details = (props) => {
             <div>
                 <p>{item.opisi}</p>
             </div>
-            <form>
+            <form onSubmit={()=>props.onAddItem(item.id, Number(kolicina))}>
                 <label htmlFor='kolicina'>Kolicina: </label>
                 <input id='kolicina' type='number' value={kolicina} onChange={(e)=> {e.target.value >= 1 && updKolicina(e.target.value)}}></input> {/*min attr nije dovoljan*/}
-                <button onClick={()=>props.onAddItem(item.id, kolicina)}>Dodaj i završi</button>
+                <input id='kolicina' type="submit" value='Dodaj'/>
+                {/* <button onClick={()=>props.onAddItem(item.id, Number(kolicina))}>Dodaj i završi</button> */}
             </form>
             <div>
                 <h1>{`Ukupno za ${item.naziv}: ${kolicina*item.cijena} KM`}</h1>

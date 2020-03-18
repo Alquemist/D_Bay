@@ -3,7 +3,7 @@ import './ItemView.css';
 
 
 const ItemList = (props) => {
-    console.log(props.opisi)
+    //console.log(props.opisi)
     return (
         <div onClick={() => props.onItemClick(props.naziv, props.id)} style={{cursor: "pointer"}}>
             <div>
