@@ -20,20 +20,20 @@ const Basket = (props) => {
     const BasketWidget = (props) => {
         return(
             <div>
-                <p>{`Vaša korpa:  Artikala: ${props.brojArtikala}  Ukupno: ${props.ukupnaCijena} KM`}</p>
-                <form onSubmit={()=>props.setDetails(1)}>
-                    <label htmlFor='detalji'>Detaljno: </label>
-                    <div>
-                        <input id='detalji' type="submit" value='>>>'/>
-                    </div>
-                    {/* <button id='detalji' onClick={()=>setDetails(1)}>>></button> */}
-                </form>
+                <div>
+                    <p>{`Vaša korpa:  Artikala: ${props.brojArtikala}  Ukupno: ${props.ukupnaCijena} KM`}</p>
+                    <button onClick={()=>setDetails(1)}>>>></button>
+                </div>
+                {
+                    props.naKasu
+                }
             </div>
         )
     };
     
     const BasketDetails = (props) => {
         return(
+            <>
             <table>
                 <thead>
                     <tr>
@@ -46,7 +46,7 @@ const Basket = (props) => {
                 <tbody>
                     {props.korpa.map((art, idx) => {
                         const item = props.items[art.id];
-                        console.log(item)
+                        //console.log(item)
                         return (
                             <tr key={art.id}>
                                 <td>{item.naziv}</td>
@@ -77,25 +77,39 @@ const Basket = (props) => {
                     })}
                 </tbody>
             </table>
+            <div>
+                <button onClick={()=>setDetails(0)}>{'<<<'}</button>
+            </div>
+            <div>
+                {props.naKasu}
+            </div>
+            
+            </>
         )
     };
+
+    const naKasu = (
+        props.view!==3?
+        <button id='naKasu' onClick={()=>props.changeView(3)}>Na Kasu >></button>:
+        null
+        );
 
     return(
         <>
         {
         details?
-        <>
-        <BasketDetails items={props.items} korpa={props.korpa} updKorpa={props.updKorpa} disabled={props.view===3}/>:
-        {
-        props.view!==3?
-        <div>
-            <label htmlFor='naKasu'>{`Ukupno ${ukupnaCijena} KM `}</label>
-            <button id='naKasu' onClick={()=>props.changeView(3)}>Na Kasu >></button>
-        </div>
-        :null
-        }
-        </>
-        : <BasketWidget brojArtikala={brojArtikala} ukupnaCijena={ukupnaCijena} setDetails={setDetails}/>
+        <BasketDetails
+            items={props.items}
+            korpa={props.korpa}
+            naKasu={naKasu}
+            updKorpa={props.updKorpa}
+            disabled={props.view===3}
+        />:
+        <BasketWidget
+            brojArtikala={brojArtikala}
+            ukupnaCijena={ukupnaCijena}
+            naKasu={naKasu}
+        />
         }
         </>
     )
