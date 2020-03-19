@@ -1,0 +1,28 @@
+.itemView {
+    width:100%;
+}
+
+.itemTitle {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-style: italic;
+    color: forestgreen;
+    font-size: clamp(20px, 5vw, 3rem);
+    margin-bottom: 3px;
+}
+
+.itemTitle-selected {
+    text-decoration: underline;
+}
+
+.itemDescript {
+    font-family: 'Cambria', 'Cochin', Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    /* font-size: 3vw; */
+    font-size: clamp(15px, 3vw, 1.5rem);
+}
+
+/* .itemCijena {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+    font-style: italic;
+    font-size: 3vw;
+} */

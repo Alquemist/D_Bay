@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import '../Styles/Basket.css';
 
 const Basket = (props) => {
 
@@ -20,10 +21,8 @@ const Basket = (props) => {
     const BasketWidget = (props) => {
         return(
             <div>
-                <div>
-                    <p>{`Vaša korpa:  Artikala: ${props.brojArtikala}  Ukupno: ${props.ukupnaCijena} KM`}</p>
-                    <button onClick={()=>setDetails(1)}>>>></button>
-                </div>
+                <p className='basketTitle'><span style={{fontWeight: 'bold'}}>Vaša korpa:  </span>{`Artikala: ${props.brojArtikala}  Ukupno: ${props.ukupnaCijena} KM`}</p>
+                <button className='basketButton' onClick={()=>setDetails(1)}>Detalji ></button>
                 {
                     props.naKasu
                 }
@@ -51,7 +50,7 @@ const Basket = (props) => {
                             <tr key={art.id}>
                                 <td>{item.naziv}</td>
                                 <td>
-                                    <input
+                                    <input className='inputStyle'
                                         value={art.kolicina}
                                         disabled={props.disabled}
                                         onChange={(e)=>{
@@ -77,20 +76,15 @@ const Basket = (props) => {
                     })}
                 </tbody>
             </table>
-            <div>
-                <button onClick={()=>setDetails(0)}>{'<<<'}</button>
-            </div>
-            <div>
+                <button className='basketButton' onClick={()=>setDetails(0)}>{'<Manje'}</button>
                 {props.naKasu}
-            </div>
-            
             </>
         )
     };
 
     const naKasu = (
         props.view!==3?
-        <button id='naKasu' onClick={()=>props.changeView(3)}>Na Kasu >></button>:
+        <button className='basketButton' id='naKasu' onClick={()=>props.changeView(3)} style={{float: 'right'}}>Na Kasu >></button>:
         null
         );
 

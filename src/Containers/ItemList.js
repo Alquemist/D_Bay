@@ -10,7 +10,7 @@ const ItemList = () => {
 
     const [clickedItems, updClickedItem] = useState([]);
     const [view, changeView] = useState(1);
-    const [korpa, updKorpa] = useState([])
+    const [korpa, updKorpa] = useState([{id:1, kolicina:2}])
     //1-ItemList, 2-Details, 3-Kasa
 
     const items = [
@@ -58,7 +58,7 @@ const ItemList = () => {
 
     
 
-    // console.log('clickedItems', clickedItems, 'view', view, 'korpa', korpa)
+    console.log('clickedItems', clickedItems, 'korpa', korpa)
     console.log(korpa.length)
     return (
         <>
@@ -77,7 +77,10 @@ const ItemList = () => {
             view===1
             ? items.map((item, idx) => {
                 return (
-                    <ItemView key={item.naziv} {...{...item, opisi: item.opisi.split(" ").slice(0,5).join(" ")+"...", id: idx}} onItemClick={onItemClick}/>
+                    <ItemView key={item.naziv}
+                    {...{...item, opisi: item.opisi.split(" ").slice(0,5).join(" ")+"...", id: idx}}
+                    clickedItems={clickedItems}
+                    onItemClick={onItemClick}/>
                 )
             })
         : null
