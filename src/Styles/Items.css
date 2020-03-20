@@ -21,8 +21,9 @@
     font-size: clamp(15px, 3vw, 1.5rem);
 }
 
-/* .itemCijena {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
-    font-style: italic;
-    font-size: 3vw;
-} */
+.inputElement {
+    border: 1px solid forestgreen;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+}

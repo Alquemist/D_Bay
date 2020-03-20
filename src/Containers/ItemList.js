@@ -8,10 +8,11 @@ import CashierForm from './CashierForm';
 
 const ItemList = () => {
 
-    const [clickedItems, updClickedItem] = useState([]);
-    const [view, changeView] = useState(1);
-    const [korpa, updKorpa] = useState([{id:1, kolicina:2}])
+    const initKorpa = JSON.parse(localStorage.getItem('korpa'))
+    const [korpa, updKorpa] = useState(initKorpa? initKorpa: []); //incijalizacija stanja korpe iz LS
+    const [view, changeView] = useState(1); //pseudo router
     //1-ItemList, 2-Details, 3-Kasa
+    const [clickedItem, updClickedItem] = useState([]); //promijenjljiva koja određuje koji artikl će se renedrovati ako je view===2
 
     const items = [
         {naziv: 'Zimocvat', opisi: opisi.zimocvat, src: './img/pic(1).jpg', cijena: 5},
@@ -22,20 +23,11 @@ const ItemList = () => {
         {naziv: 'Orhideja', opisi: opisi.orhideja, src: './img/pic(8).jpg', cijena: 15},
     ];
 
-    // let brojArtikala, ukupnaCijena = [0, 0];
-    // for (const item of korpa) {
-    //     console.log(item, brojArtikala)
-    //     brojArtikala += item.kolicina? item.kolicina: 0
-    //     ukupnaCijena += item.kolicina? item.kolicina * (items[item.id].cijena): 0
+
+    // const onItemClick = (id) => {
+    //     updClickedItem(id);
+    //     changeView(2)
     // };
-
-
-    const onItemClick = (item, id) => {
-        console.log(`item clicked: ${item}`)
-        clickedItems.unshift(id)
-        updClickedItem([...clickedItems]);
-        changeView(2)
-    };
 
     const onAddItem = (id, kolicina) => {
         updKorpa(oldVal => {
@@ -49,17 +41,17 @@ const ItemList = () => {
             } else {
                 oldVal.unshift({id:id, kolicina: kolicina});
             }
-            
-            localStorage.setItem('korpa:', JSON.stringify(oldVal));
+            localStorage.setItem('korpa', JSON.stringify(oldVal));
             changeView(1);
             return [...oldVal];
         })
     };
 
     
+    const itemsInBasket = korpa.map(art => {return art.id})
 
-    console.log('clickedItems', clickedItems, 'korpa', korpa)
-    console.log(korpa.length)
+
+    console.log('initKorpa', initKorpa, 'korpa', korpa)
     return (
         <>
         {
@@ -79,14 +71,14 @@ const ItemList = () => {
                 return (
                     <ItemView key={item.naziv}
                     {...{...item, opisi: item.opisi.split(" ").slice(0,5).join(" ")+"...", id: idx}}
-                    clickedItems={clickedItems}
-                    onItemClick={onItemClick}/>
+                    itemInBasket={itemsInBasket.includes(idx)}
+                    onItemClick={(id) => {updClickedItem(id); changeView(2) }}/>
                 )
             })
         : null
         }
         {
-            view === 2 ? <Details item={{...items[clickedItems[0]], id:clickedItems[0]}} onAddItem={onAddItem}/>: null
+            view === 2 ? <Details item={{...items[clickedItem], id:clickedItem}} onAddItem={onAddItem} changeView={changeView}/>: null
         }
         {
             view === 3 ? <CashierForm/> : null

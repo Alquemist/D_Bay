@@ -31,6 +31,7 @@ const Basket = (props) => {
     };
     
     const BasketDetails = (props) => {
+        console.log(props.disabled)
         return(
             <>
             <table>
@@ -61,12 +62,13 @@ const Basket = (props) => {
                                     />
                                 </td>
                                 <td>{item.cijena*art.kolicina}</td>
-                                <td>
-                                    <button 
+                                <td style={{paddingTop: '2px', paddingBottom: '2px'}}>
+                                    <button className='removeItem'
                                         disabled={props.disabled}
                                         onClick={()=>{
                                             props.updKorpa((oldVal)=>{
                                                 oldVal.splice(idx, 1)
+                                                localStorage.setItem('korpa:', JSON.stringify(oldVal))
                                                 return [...oldVal]
                                             })
                                     }}>X</button>
@@ -76,7 +78,7 @@ const Basket = (props) => {
                     })}
                 </tbody>
             </table>
-                <button className='basketButton' onClick={()=>setDetails(0)}>{'<Manje'}</button>
+                <button className='basketButton' onClick={()=>setDetails(0)}>{'< Manje'}</button>
                 {props.naKasu}
             </>
         )
@@ -84,7 +86,7 @@ const Basket = (props) => {
 
     const naKasu = (
         props.view!==3?
-        <button className='basketButton' id='naKasu' onClick={()=>props.changeView(3)} style={{float: 'right'}}>Na Kasu >></button>:
+        <button className='basketButton' style={{float: 'right'}} onClick={()=>props.changeView(3)}>Kasa >></button>:
         null
         );
 

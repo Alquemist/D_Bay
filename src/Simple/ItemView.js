@@ -4,10 +4,10 @@ import '../Styles/Items.css';
 
 const ItemList = (props) => {
 
-    const itemTitle = props.id in props.clickedItems ? `itemTitle itemTitle-selected`: 'itemTitle'
+    const itemTitle = props.itemInBasket ? `itemTitle itemTitle-selected`: 'itemTitle'
 
     return (
-        <div onClick={() => props.onItemClick(props.naziv, props.id)} style={{cursor: "pointer"}}>
+        <div onClick={() => props.onItemClick(props.id)} style={{cursor: "pointer"}}>
             <div>
                 <h1 className={itemTitle}>{props.naziv}</h1>
             </div>
