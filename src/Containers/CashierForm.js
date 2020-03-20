@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import InputField from '../Simple/inputField';
 import '../Styles/FormStyles.css';
 
-const CashierForm = () => {
+const CashierForm = (props) => {
 
     const defValues = {
         ime: undefined,
@@ -28,7 +28,8 @@ const CashierForm = () => {
 
 
     const onFormSubmit = () => {
-        alert(JSON.stringify(values))
+        alert(JSON.stringify(values));
+        props.changeView(1);
     };
 
     return(
