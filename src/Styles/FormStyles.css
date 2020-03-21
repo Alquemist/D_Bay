@@ -18,9 +18,9 @@
 .formParent {
     overflow: auto;
     display: block;
-    border-color: forestgreen;
+    /* border-color: forestgreen;
     border-style: double hidden hidden double;
-    border-radius: 2px;
+    border-radius: 2px; */
     margin-top: 8px;
     max-width: 800px;
 }

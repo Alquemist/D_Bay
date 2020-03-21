@@ -18,7 +18,7 @@ const ItemList = () => {
     const [clickedItem, updClickedItem] = useState([]); //promijenjljiva koja označava koji artikl će se renedrovati ako je view===2
 
     const items = [  //Ovo bi po pravilu dolazilo sa servera
-        {naziv: 'Zimocvat', opisi: opisi.zimocvat, src: './img/pic(1).jpg', cijena: 5},
+        {naziv: 'Cinija', opisi: opisi.cinija, src: './img/pic(1).jpg', cijena: 5},
         {naziv: 'Tratinčica', opisi: opisi.tratincica, src: './img/pic(2).jpg', cijena: 5},
         {naziv: 'Ruža', opisi: opisi.ruza, src: './img/pic(3).jpg', cijena: 10},
         {naziv: 'Tulipan', opisi: opisi.tulipan, src: './img/pic(5).jpg', cijena: 10},
