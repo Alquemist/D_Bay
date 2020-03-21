@@ -75,10 +75,10 @@ const ItemList = () => {
         : null
         }
         {
-            view === 2 ? <Details item={{...items[clickedItem], id:clickedItem}} onAddItem={onAddItem} changeView={changeView}/>: null
+            view === 2 ? <Details item={{...items[clickedItem], id:clickedItem}} onAddItem={onAddItem} changeView={changeView}/>: null  //Detaljni pregled artikla
         }
         {
-            view === 3 ? <CashierForm changeView={changeView}/> : null
+            view === 3 ? <CashierForm changeView={changeView}/> : null //Forma na kasi
         }
         </>
     )
