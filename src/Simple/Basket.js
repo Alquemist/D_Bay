@@ -3,9 +3,16 @@ import '../Styles/Basket.css';
 
 const Basket = (props) => {
 
+    // U okviru Basket komponente definisane su dvije child komponente "BasketWidget" i "BasketDetails" 
+    // U zavisnosti od vrijednosti promijenljive details renderuje se jedna ili druga
+    // BasketWidget prikazuje samo osnovne podatke o stanju korpe i šredi prostor
+    // Pritiskom na dugme "Detalji" prikazuju se detaljni podaci o korpi "BasketDetails"
+    // U detaljnom prikazu imamo mogućnost dodavanja ili brisanja artikala iz korpe
+
+
     const [details, setDetails] = useState(0)
 
-    const [brojArtikala, ukupnaCijena] = 
+    const [brojArtikala, ukupnaCijena] = //inicijalizacija promijenljivih na osnovu korpe
         props.korpa.length?
         (() => {
         let [brojArtikala, ukupnaCijena] = [0, 0];
@@ -31,7 +38,11 @@ const Basket = (props) => {
     };
     
     const BasketDetails = (props) => {
-        console.log(props.disabled)
+
+        const onChangeItem = (artId, kolicina) => {
+            
+        }
+        
         return(
             <>
             <table>
@@ -56,7 +67,8 @@ const Basket = (props) => {
                                         disabled={props.disabled}
                                         onChange={(e)=>{
                                             const korpa = [...props.korpa]
-                                            korpa[idx] = {id: art.id, kolicina: e.target.value};
+                                            korpa[idx] = {id: art.id, kolicina: Number(e.target.value)};
+                                            localStorage.setItem('korpa', JSON.stringify(korpa));
                                             props.updKorpa(korpa)
                                         }}
                                     />
@@ -68,7 +80,7 @@ const Basket = (props) => {
                                         onClick={()=>{
                                             props.updKorpa((oldVal)=>{
                                                 oldVal.splice(idx, 1)
-                                                localStorage.setItem('korpa:', JSON.stringify(oldVal))
+                                                localStorage.setItem('korpa', JSON.stringify(oldVal))
                                                 return [...oldVal]
                                             })
                                     }}>X</button>
@@ -98,8 +110,9 @@ const Basket = (props) => {
             items={props.items}
             korpa={props.korpa}
             naKasu={naKasu}
-            updKorpa={props.updKorpa}
             disabled={props.view===3}
+            updKorpa={props.updKorpa}
+            
         />:
         <BasketWidget
             brojArtikala={brojArtikala}

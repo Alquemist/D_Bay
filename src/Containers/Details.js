@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import '../Styles/Items.css';
 
+//Klikom na neku od thumbanil komponenti prikazaće se ova komponenta
 const Details = (props) => {
     const item = {...props.item};
-    const [kolicina, updKolicina] = useState(1);
+    const [kolicina, updKolicina] = useState(1); //izabrana količina se čuva interno
 
     return (
-        <div style={{float:'left'}}>
+        <div>
             <div style={{float:'left'}}>
                 <h1 className='itemTitle'>{item.naziv}</h1>
             </div>
@@ -19,7 +20,7 @@ const Details = (props) => {
             <div>
                 <p className='itemDescript'>{item.opisi}</p>
             </div>
-            <form onSubmit={()=>props.onAddItem(item.id, Number(kolicina))}>
+            <form onSubmit={()=>props.onAddItem(item.id, kolicina)}>
                 <label htmlFor='kolicina' style={{fontStyle: 'italic', fontWeight: 'bold'}}>Kolicina: </label>
                 <input className='inputElement'
                     id='kolicina'

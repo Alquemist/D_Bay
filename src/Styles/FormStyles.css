@@ -38,6 +38,10 @@
     max-width: 700px;
 }
 
+.inputElement-invalid {
+    border-color: orange;
+}
+
 .formButton {
     border-radius: 6px;
     color: forestgreen;

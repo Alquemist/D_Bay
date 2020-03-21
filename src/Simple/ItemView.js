@@ -1,10 +1,10 @@
 import React from 'react';
 import '../Styles/Items.css';
 
+//thumbnail svakog artikla na početnoj stranici
+const ItemView = (props) => {
 
-const ItemList = (props) => {
-
-    const itemTitle = props.itemInBasket ? `itemTitle itemTitle-selected`: 'itemTitle'
+    const itemTitle = props.itemInBasket ? `itemTitle itemTitle-selected`: 'itemTitle' //ako je art. u korpi naziv će biti podvučen
 
     return (
         <div onClick={() => props.onItemClick(props.id)} style={{cursor: "pointer"}}>
@@ -21,4 +21,4 @@ const ItemList = (props) => {
     )
 }
     
-export default ItemList;
+export default ItemView;
