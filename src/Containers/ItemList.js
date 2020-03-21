@@ -12,7 +12,6 @@ zavisno od promijenljive "view" */
 const ItemList = () => {
 
     const initKorpa = JSON.parse(localStorage.getItem('korpa'))
-    console.log(typeof initKorpa[0].kolicina)
     const [korpa, updKorpa] = useState(initKorpa? initKorpa: []); //incijalizacija stanja korpe iz LS ili prazan niz
     const [view, changeView] = useState(1); //pseudo router; 1-ItemList, 2-Details, 3-Kasa
     const [clickedItem, updClickedItem] = useState([]); //promijenjljiva koja označava koji artikl će se renedrovati ako je view===2
@@ -46,7 +45,7 @@ const ItemList = () => {
     
     const itemsInBasket = korpa.map(art => {return art.id}) //pomoćna promijenljiva koja drži listu izabranih artikala
 
-    console.log(typeof korpa[0].kolicina)
+    //console.log(typeof korpa[0].kolicina)
     return (
         <>
         {
